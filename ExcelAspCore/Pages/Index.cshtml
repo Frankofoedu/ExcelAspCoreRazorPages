@@ -1,0 +1,127 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="mt-3 mb-5 col-sm-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            year
+                        </th>
+                        <th>
+                            phone
+                        </th>
+                        <th>
+                            email
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stud in Model.Students)
+                    {
+                        <tr>
+                            <td>
+                                @stud.YearOfStudy
+                            </td>
+                            <td>
+                                @stud.PhoneNo
+                            </td>
+                            <td>
+                                @stud.Email
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="row">
+
+
+
+            <div class="col-md-4">
+                <input type="file" asp-for="formFile" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <input type="submit" name="Upload" asp-page-handler="ImportExcel" value="Upload" id="btnupload" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div id="divPrint"></div>
+
+        </div>
+    </div>
+
+</form>
+
+<input type="hidden" id="hiddenExcelUrl" value="@Url.Action("Import", "Home")" />
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+                            //$(function () {
+                            //    $('#btnupload').on('click', function () {
+                            //        var fileExtension = ['xls', 'xlsx'];
+                            //        var filename = $('#fileupload').val();
+                            //        if (filename.length == 0) {
+                            //            alert("Please select a file.");
+                            //            return false;
+                            //        }
+                            //        else {
+                            //            var extension = filename.replace(/^.*\./, '');
+                            //            if ($.inArray(extension, fileExtension) == -1) {
+                            //                alert("Please select only excel files.");
+                            //                return false;
+                            //            }
+                            //        }
+                            //        var fdata = new FormData();
+                            //        var fileUpload = $("#fileupload").get(0);
+                            //        var files = fileUpload.files;
+                            //        fdata.append(files[0].name, files[0]);
+
+                            //        var url = $('#hiddenExcelUrl').val();
+
+                            //        $.ajax({
+                            //            type: "POST",
+                            //            url: window.location.origin + url,
+                            //            //beforeSend: function (xhr) {
+                            //            //    xhr.setRequestHeader("XSRF-TOKEN",
+                            //            //        $('input:hidden[name="__RequestVerificationToken"]').val());
+                            //            //},
+                            //            data: fdata,
+                            //            contentType: false,
+                            //            processData: false,
+                            //            success: function (response) {
+                            //                if (response.length == 0)
+                            //                    alert('Some error occured while uploading');
+                            //                else {
+                            //                    $('#divPrint').html(response);
+                            //                }
+                            //            },
+                            //            error: function (e) {
+                            //                $('#divPrint').html(e.responseText);
+                            //            }
+                            //        });
+                            //    })
+                            //    //$('#btnExport').on('click', function () {
+                            //    //    var fileExtension = ['xls', 'xlsx'];
+                            //    //    var filename = $('#fileupload').val();
+                            //    //    if (filename.length == 0) {
+                            //    //        alert("Please select a file then Import");
+                            //    //        return false;
+                            //    //    }
+                            //    //});
+                            //});
+
+    </script>
+
+}
